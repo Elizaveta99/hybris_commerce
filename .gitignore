@@ -10,6 +10,7 @@ gensrc/
 .springBeans
 platformhome.properties
 *.xsd
+*.jar
 
 /log
 /temp

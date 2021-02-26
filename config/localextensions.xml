@@ -8,10 +8,13 @@
     <extension name='commerceservicesbackoffice' />
     <extension name='solrfacetsearchbackoffice' />
     <extension name='solrserver' />
-    <extension name='yacceleratorbackoffice' />
-    <extension name='yacceleratorinitialdata' />
-    <extension name='yacceleratorfulfilmentprocess' />
-    <extension name='yacceleratorstorefront' />
+    <extension name='trainingbackoffice' />
+    <extension name='traininginitialdata' />
+    <extension name='trainingfulfilmentprocess' />
+    <extension name='trainingstorefront' />
+	<extension name="trainingcore"/>
+	<extension name="trainingfacades"/>
+	<!--<extension name="trainingtest"/>-->
     <extension name='ycommercewebservices' />
     <extension name='ycommercewebservicestest' />
     <extension name='electronicsstore' />
