@@ -4,6 +4,7 @@
 **/WEB-INF/lib/
 classes/
 gensrc/
+idea-module-files/
 
 .classpath
 .project

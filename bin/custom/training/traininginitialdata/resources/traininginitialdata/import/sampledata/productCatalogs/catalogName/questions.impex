@@ -1,0 +1,5 @@
+# Insert Questions
+INSERT_UPDATE Question;code[unique=true];question;questionCustomer(uid);answer;answerCustomer(uid);product(code,catalogVersion(catalog(id),version))[unique=true]
+;Q1;Question 1;vipgold@hybris.com;;;23191:electronicsProductCatalog:Staged
+;Q2;Question 2;vipgold@hybris.com;;;23191:electronicsProductCatalog:Staged
+;Q3;Question 3;vipgold@hybris.com;;;23210:electronicsProductCatalog:Staged
