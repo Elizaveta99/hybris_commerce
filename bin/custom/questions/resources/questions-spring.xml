@@ -43,4 +43,8 @@
 		<property name="extensionName" value="questions" />
 	</bean>
 
+	<bean id="questionsCustomSetup" class="de.hybris.questions.setup.QuestionsCustomSetup">
+		<property name="importService" ref="importService" />
+	</bean>
+
 </beans>

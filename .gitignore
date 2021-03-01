@@ -5,6 +5,7 @@
 classes/
 gensrc/
 idea-module-files/
+testclasses/
 
 .classpath
 .project
@@ -32,3 +33,15 @@ platformhome.properties
 /config/tomcat
 /config/readme.txt
 /config/hybris4intellij.properties
+
+_ui/
+**/wro_addons.xml
+**/web/addonsrc/
+**/web/commonwebsrc/
+**/_ui-src/addons/
+**/messages/addons/
+**/tags/addons/
+**/tld/addons/
+**/views/addons/
+
+

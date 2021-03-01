@@ -20,5 +20,6 @@ public final class QuestionsWebConstants // NOSONAR
 		//empty to avoid instantiating this constant class
 	}
 
-	// implement here constants used by this extension
+	public final static String NUMBER_OF_QUESTIONS_TO_SHOW = "numberOfQuestionsToShow";
+	public final static String FONT_SIZE = "fontSize";
 }
