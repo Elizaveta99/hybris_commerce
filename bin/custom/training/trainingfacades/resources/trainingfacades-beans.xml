@@ -14,6 +14,8 @@
 	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
 		<property name="genders" type="java.util.List&lt;de.hybris.training.facades.product.data.GenderData>"/>
 		<property name = "questions" type = "java.util.List&lt;questions.data.QuestionData&gt;" />
+		<property name = "questionsCount" type = "java.lang.Long" />
+		<property name="imageURL" type="String" />
 	</bean>
 
 	<bean class="de.hybris.training.facades.product.data.GenderData">

@@ -1,3 +1,33 @@
+# Macros / Replacement Parameter definitions
+$productCatalog=electronicsProductCatalog
+$productCatalogName=Electronics Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$supercategories=supercategories(code, $catalogVersion)
+$baseProduct=baseProduct(code,$catalogVersion)
+$approved=approvalstatus(code)[default='check']
+
+$contentCatalog=electronicsContentCatalog
+$contentCatalogName=Electronics Content Catalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$siteResource=jar:de.hybris.training.initialdata.setup.InitialDataSystemSetup&/traininginitialdata/import/coredata/contentCatalogs/catalogName
+
+$medias=medias(code, $catalogVersion)
+
+INSERT_UPDATE MediaFormat;qualifier[unique=true];name
+                         ;smallDiscussed;Discussed Image Format
+
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];$catalogVersion
+                   ;smallDiscussed;discussed_product_image;image/jpeg;discussed.jpg;$siteResource/images/discussed.jpg
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
+                            ;smallDiscussedContainer;discussed.jpg;
+
+# Insert Products
+INSERT_UPDATE Product;code[unique=true];$supercategories;manufacturerName;manufacturerAID;unit(code);ean;variantType(code);questionsCount;discussedImage(qualifier)[default=smallDiscussedContainer];$catalogVersion;$approved
+                     ;23191;1288, brand_5;Sony;ACC-CSPW;pieces;;;2;
+                     ;23210;576, brand_5;Sony;DSC-P71;pieces;4901780755943;;1;
+
+
 # Insert Questions
 INSERT_UPDATE Question;code[unique=true];question;questionCustomer(uid);answer;answerCustomer(uid);product(code,catalogVersion(catalog(id),version))[unique=true]
 ;Q1;Question 1;vipgold@hybris.com;;;23191:electronicsProductCatalog:Staged

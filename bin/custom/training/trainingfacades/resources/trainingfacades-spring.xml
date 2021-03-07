@@ -192,6 +192,7 @@
 
 	<bean id="productQuestionsPopulator" class="de.hybris.training.facades.populators.ProductQuestionsPopulator">
 		<property name="questionsConverter" ref="questionsConverter" />
+		<property name="mediaService" ref="mediaService" />
 	</bean>
 
 	<bean parent="modifyPopulatorList">
