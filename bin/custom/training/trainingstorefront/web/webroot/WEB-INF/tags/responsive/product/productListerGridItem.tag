@@ -57,7 +57,10 @@
 				<img style="width: 32px; height: 32px;" src="${imageUrlHtml}" title="${variantNameHtml}" alt="${variantNameHtml}"/>
 			</c:forEach>
 		</div>
-
+		Questions = ${product.questionsCount}
+		<c:if test="${product.questionsCount > 1}">
+			<img src="${product.imageURL}" />
+		</c:if>
 
 		<c:set var="product" value="${product}" scope="request"/>
 		<c:set var="addToCartText" value="${addToCartText}" scope="request"/>

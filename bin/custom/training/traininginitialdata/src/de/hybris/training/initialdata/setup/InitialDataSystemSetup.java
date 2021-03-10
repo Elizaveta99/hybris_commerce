@@ -109,6 +109,7 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	{
 		impexImport("/traininginitialdata/import/sampledata/productCatalogs/catalogName/questions.impex");
 		impexImport("/traininginitialdata/import/coredata/stores/storeName/solr.impex");
+		impexImport("/traininginitialdata/import/coredata/stores/storeName/solr_en.impex");
 		LOG.info("Custom project data loading for the Training extension completed.");
 	}
 

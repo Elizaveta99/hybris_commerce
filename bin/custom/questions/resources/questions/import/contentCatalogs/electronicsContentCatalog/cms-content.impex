@@ -14,17 +14,5 @@ $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCata
 INSERT_UPDATE QuestionsCMSComponent;$contentCV[unique=true];uid[unique=true];name;numberOfQuestionsToShow;fontSize;&componentRef;
 ;;questionsCMSComponent;Questions CMS Component;3;24;questionsCMSComponent;
 
-#INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage2Template'];validComponentTypes(code);compTypeGroup(code)
-#;QuestionsSlotName;;QuestionsCMSComponent
-
-INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'];validComponentTypes(code);compTypeGroup(code)
-;Section4;;QuestionsCMSComponent
-
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;questionsContentSlot;Questions slot;true;questionsCMSComponent
-
-#INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='productDetails'];contentSlot(uid,$contentCV)[unique=true]
-#;;questionscontentslotforpage-ProductDetailsPage;QuestionsSlotName;;questionsContentSlot
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='productDetails'];contentSlot(uid,$contentCV)[unique=true]
-;;questionscontentslotforpage-ProductDetailsPage;Section4;;questionsContentSlot
+;;TabsSlot;Questions slot;true;questionsCMSComponent
