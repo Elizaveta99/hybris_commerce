@@ -20,6 +20,11 @@
 </c:forEach>
 
 <li class="${fn:escapeXml(productTagClasses)}">
+	Questions = ${product.questionsCount} !!! ${product.code}
+	<img src="${product.imageURL}" />
+	<c:if test="${product.questionsCount > 1}">
+		<img src="${product.imageURL}" />
+	</c:if>
 	<ycommerce:testId code="test_searchPage_wholeProduct">
 		<a class="product__list--thumb" href="${fn:escapeXml(productUrl)}" title="${fn:escapeXml(product.name)}" >
 			<product:productPrimaryImage product="${product}" format="thumbnail"/>
@@ -45,7 +50,6 @@
 		<c:if test="${not empty product.summary}">
 			<div class="product__listing--description">${ycommerce:sanitizeHTML(product.summary)}</div>
 		</c:if>
-
 
 
 		<c:set var="product" value="${product}" scope="request"/>

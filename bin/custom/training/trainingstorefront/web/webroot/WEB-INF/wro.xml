@@ -7,9 +7,7 @@
  ("Confidential Information"). You shall not disclose such Confidential
  Information and shall use it only in accordance with the terms of the
  license agreement you entered into with SAP.
--->
-<groups xmlns="http://www.isdc.ro/wro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.isdc.ro/wro wro.xsd">
+--><groups xmlns="http://www.isdc.ro/wro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.isdc.ro/wro wro.xsd">
 	
 	<import>classpath:wro_addons.xml</import>
 
@@ -93,4 +91,7 @@
         <js>/_ui/responsive/common/js/cms/*.js</js>
     </group>
    
-</groups>       
+<group name="trainingTheme_responsive">
+							<css>/_ui/responsive/theme-trainingTheme/css/style.css</css>
+						</group>
+</groups>

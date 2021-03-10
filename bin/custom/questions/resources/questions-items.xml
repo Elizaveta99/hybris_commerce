@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<relations>
+		<relation code="Product2Question" autocreate="true" generate="false" localized="false">
+			<sourceElement qualifier="product" type="Product" cardinality="one">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="questions" type="Question" collectiontype="set" cardinality="many">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+	</relations>
+
+	<itemtypes>
+		<itemtype generate="true" code="Question" autocreate="true">
+			<deployment table="Questions" typecode="12345"/>
+			<attributes>
+				<attribute qualifier="code" type="java.lang.String">
+					<description>short unique code of question</description>
+					<persistence type="property" />
+					<modifiers unique="true" optional="false" initial="true"/>
+				</attribute>
+				<attribute qualifier="question" type="java.lang.String">
+					<description>content of question</description>
+					<persistence type="property" />
+					<modifiers optional="false" initial="true"/>
+				</attribute>
+				<attribute qualifier="questionCustomer" type="Customer">
+					<description>customer who asked the question</description>
+					<persistence type="property" />
+					<modifiers optional="false"/>
+					<defaultvalue>anonymous</defaultvalue>
+				</attribute>
+				<attribute qualifier="answer" type="java.lang.String">
+					<description>content of answer</description>
+					<persistence type="property" />
+					<modifiers optional="true"/>
+				</attribute>
+				<attribute qualifier="answerCustomer" type="Customer">
+					<description>customer who answered</description>
+					<persistence type="property" />
+					<modifiers optional="true"/>
+					<defaultvalue>anonymous</defaultvalue>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="QuestionsCMSComponent" jaloclass="de.hybris.questions.jalo.QuestionsCMSComponent"
+				  extends="SimpleCMSComponent" autocreate="true" generate="true"
+				  abstract="false" >
+			<description>it represents paragraph component for displaying questions.</description>
+			<attributes>
+				<attribute qualifier="numberOfQuestionsToShow" type="java.lang.Long">
+					<persistence type="property" />
+					<description>attribute that stores number of questions for product.</description>
+					<modifiers optional="false"/>
+					<defaultvalue>3</defaultvalue>
+				</attribute>
+				<attribute qualifier="fontSize" type="java.lang.Integer">
+					<persistence type="property" />
+					<description>attribute that stores font size.</description>
+					<modifiers optional="true"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+	</itemtypes>
+</items>
