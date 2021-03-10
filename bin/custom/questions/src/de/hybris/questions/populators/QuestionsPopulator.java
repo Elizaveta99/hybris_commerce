@@ -1,4 +1,4 @@
-package de.hybris.training.facades.populators;
+package de.hybris.questions.populators;
 
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.converters.Populator;

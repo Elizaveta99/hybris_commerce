@@ -20,3 +20,33 @@ $solrIndexedType=electronicsProductType
 $indexBaseSite=electronics
 $indexLanguages=ja,en,de,zh
 $indexCurrencies=JPY,USD
+
+# Define price range set
+INSERT_UPDATE SolrValueRangeSet;name[unique=true];qualifier;type;solrValueRanges(&rangeValueRefID)
+                               ;trainingQuestionsCount;;int;questionsCountRef0, questionsCountRef1, questionsCountRef2, questionsCountRef3, questionsCountRef4
+
+# Define price ranges
+INSERT_UPDATE SolrValueRange;&rangeValueRefID;solrValueRangeSet(name)[unique=true];name[unique=true];from;to
+                            ;questionsCountRef0;trainingQuestionsCount;0;0;0
+                            ;questionsCountRef1;trainingQuestionsCount;1;1;1
+                            ;questionsCountRef2;trainingQuestionsCount;2;2;2
+                            ;questionsCountRef3;trainingQuestionsCount;3;3;3
+                            ;questionsCountRef4;trainingQuestionsCount;4;4;4
+
+# Define the available sorts
+INSERT_UPDATE SolrSort;&sortRefID;indexedType(identifier)[unique=true];code[unique=true];useBoost
+                      ;sortRef1;$solrIndexedType;questionsCountSort;true
+
+# Define the sort fields
+INSERT_UPDATE SolrSortField;sort(indexedType(identifier),code)[unique=true];fieldName[unique=true];ascending[unique=true]
+                           ;$solrIndexedType:questionsCountSort;questionsCount;false
+
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name,solrIndexedType(identifier))[unique=true];facet[default=true];facetType(code);priority;facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider;includeInResponse[default=true];searchQueryTemplate(name,indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType]
+                                     ;questionsCount:$solrIndexedType;;MultiSelectOr;2000;;defaultTopValuesProvider;;;
+
+
+
+# Other facet properties
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=true];facetType(code);facetSort(code);priority;visible;useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;facetDisplayNameProvider;customFacetSortProvider;topValuesProvider;rangeSets(name)
+                                 ;$solrIndexedType;questionsCount;int;;;;true;;MultiSelectOr;Alpha;2000;true;;;;;;;trainingQuestionsCount
+

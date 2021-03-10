@@ -8,23 +8,22 @@
 # Information and shall use it only in accordance with the terms of the
 # license agreement you entered into with SAP.
 # -----------------------------------------------------------------------
+$productCatalog=electronicsProductCatalog
 $contentCatalog=electronicsContentCatalog
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
+$contentCV=catalogVersion(catalog(id[default=$contentCatalog]), version[default='Online'])[default=$contentCatalog:Online]
+$siteResource=jar:de.hybris.questions.constants.QuestionsConstants&/questions/import/images
+
+$medias=medias(code, $catalogVersion)
+
+INSERT_UPDATE Media;code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];altText;$catalogVersion
+                   ;discussed_product_image;image/jpeg;discussed.jpg;$siteResource/discussed.jpg;discussed
 
 INSERT_UPDATE QuestionsCMSComponent;$contentCV[unique=true];uid[unique=true];name;numberOfQuestionsToShow;fontSize;&componentRef;
-;;questionsCMSComponent;Questions CMS Component;3;24;questionsCMSComponent;
-
-#INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage2Template'];validComponentTypes(code);compTypeGroup(code)
-#;QuestionsSlotName;;QuestionsCMSComponent
-
-INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'];validComponentTypes(code);compTypeGroup(code)
-;Section4;;QuestionsCMSComponent
+                                   ;;questionsCMSComponent;Questions CMS Component;3;24;questionsCMSComponent;
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;questionsContentSlot;Questions slot;true;questionsCMSComponent
+                         ;;TabsSlot;Questions slot;true;questionsCMSComponent
 
-#INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='productDetails'];contentSlot(uid,$contentCV)[unique=true]
-#;;questionscontentslotforpage-ProductDetailsPage;QuestionsSlotName;;questionsContentSlot
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='productDetails'];contentSlot(uid,$contentCV)[unique=true]
-;;questionscontentslotforpage-ProductDetailsPage;Section4;;questionsContentSlot
+INSERT_UPDATE CMSProductListComponent;$contentCV[unique=true];uid[unique=true];icon(code);
+                                     ;;ProductListComponent;discussed_product_image

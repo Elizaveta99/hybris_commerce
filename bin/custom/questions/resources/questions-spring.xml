@@ -47,4 +47,33 @@
 		<property name="importService" ref="importService" />
 	</bean>
 
+	<bean id="productQuestionsPopulator" class="de.hybris.questions.populators.ProductQuestionsPopulator">
+		<property name="questionsConverter" ref="questionsConverter" />
+	</bean>
+
+	<bean id="searchResultProductQuestionsPopulator" class="de.hybris.questions.populators.SearchResultProductQuestionsPopulator" />
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productConverter" />
+		<property name="add" ref="productQuestionsPopulator" />
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="commerceSearchResultProductConverter" />
+		<property name="add" ref="searchResultProductQuestionsPopulator" />
+	</bean>
+
+	<bean id="questionsPopulator" class="de.hybris.questions.populators.QuestionsPopulator" >
+		<property name="customerConverter" ref="customerConverter" />
+	</bean>
+
+	<bean id="questionsConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="questions.data.QuestionData"/>
+		<property name="populators">
+			<list>
+				<ref bean="questionsPopulator"/>
+			</list>
+		</property>
+	</bean>
+
 </beans>

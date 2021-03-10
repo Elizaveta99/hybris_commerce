@@ -190,27 +190,6 @@
 
 	<bean id="genderData" class="de.hybris.training.facades.product.data.GenderData" scope="prototype"/>
 
-	<bean id="productQuestionsPopulator" class="de.hybris.training.facades.populators.ProductQuestionsPopulator">
-		<property name="questionsConverter" ref="questionsConverter" />
-		<property name="mediaService" ref="mediaService" />
-	</bean>
 
-	<bean parent="modifyPopulatorList">
-		<property name="list" ref="defaultProductConverter" />
-		<property name="add" ref="productQuestionsPopulator" />
-	</bean>
-
-	<bean id="questionsPopulator" class="de.hybris.training.facades.populators.QuestionsPopulator" >
-		<property name="customerConverter" ref="customerConverter" />
-	</bean>
-
-	<bean id="questionsConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="questions.data.QuestionData"/>
-		<property name="populators">
-			<list>
-				<ref bean="questionsPopulator"/>
-			</list>
-		</property>
-	</bean>
 
 </beans>

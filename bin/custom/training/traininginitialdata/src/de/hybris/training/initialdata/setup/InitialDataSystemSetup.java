@@ -107,8 +107,6 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	@SystemSetup(type = Type.PROJECT, process = Process.ALL)
 	public void createProjectData(final SystemSetupContext context)
 	{
-		impexImport("/traininginitialdata/import/sampledata/productCatalogs/catalogName/questions.impex");
-		impexImport("/traininginitialdata/import/coredata/stores/storeName/solr.impex");
 		LOG.info("Custom project data loading for the Training extension completed.");
 	}
 

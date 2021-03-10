@@ -15,9 +15,6 @@
     <nav:pagination top="true"  supportShowPaged="${isShowPageAllowed}" supportShowAll="${isShowAllAllowed}" searchPageData="${searchPageData}" searchUrl="${searchPageData.currentQuery.url}"  numberPagesShown="${numberPagesShown}"/>
     <ul class="product__listing product__list">
             <c:forEach items="${searchPageData.results}" var="product">
-<%--                <c:if test="${product.questionsCount > 1}">--%>
-<%--                    <img src="${product.imageURL}" />--%>
-<%--                </c:if>--%>
                 <product:productListerItem product="${product}"/>
             </c:forEach>
     </ul>

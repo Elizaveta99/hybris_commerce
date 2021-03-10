@@ -27,8 +27,9 @@ public class QuestionsCustomSetup {
     @SystemSetup(type = SystemSetup.Type.PROJECT)
     public boolean createProjectData() {
         LOG.info("Starting custom project data loading for the Questions extension");
+        impexImport("/questions/import/stores/electronics/solr.impex");
+        impexImport("/questions/import/productCatalogs/electronicsProductCatalog/questions.impex");
         impexImport("/questions/import/contentCatalogs/electronicsContentCatalog/cms-content.impex");
-        //impexImport(".impex");
         LOG.info("Custom project data loading for the Questions extension completed.");
         return true;
     }

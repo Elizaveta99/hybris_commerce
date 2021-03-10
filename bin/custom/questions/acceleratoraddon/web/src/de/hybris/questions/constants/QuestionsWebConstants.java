@@ -22,4 +22,5 @@ public final class QuestionsWebConstants // NOSONAR
 
 	public final static String NUMBER_OF_QUESTIONS_TO_SHOW = "numberOfQuestionsToShow";
 	public final static String FONT_SIZE = "fontSize";
+	public final static String ICON = "icon";
 }

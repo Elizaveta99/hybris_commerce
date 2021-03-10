@@ -16,7 +16,6 @@ package de.hybris.training.facades.constants;
 public class TrainingFacadesConstants extends GeneratedTrainingFacadesConstants
 {
 	public static final String EXTENSIONNAME = "trainingfacades";
-	public static final String FORMAT = "smallDiscussed";
 
 	private TrainingFacadesConstants()
 	{

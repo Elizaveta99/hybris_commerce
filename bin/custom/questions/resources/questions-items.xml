@@ -28,6 +28,16 @@
 	</relations>
 
 	<itemtypes>
+		<itemtype code="Product" autocreate="false" generate="false">
+			<description>Extending the Product type from core with additional attributes.</description>
+			<attributes>
+				<attribute qualifier="questionsCount" type="java.lang.Integer">
+					<description>Amount of questions about product.</description>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
 		<itemtype generate="true" code="Question" autocreate="true">
 			<deployment table="Questions" typecode="12345"/>
 			<attributes>
@@ -76,6 +86,15 @@
 					<persistence type="property" />
 					<description>attribute that stores font size.</description>
 					<modifiers optional="true"/>
+					<defaultvalue>14</defaultvalue>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="CMSProductListComponent" autocreate="false" generate="false">
+			<attributes>
+				<attribute qualifier="icon" type="Media">
+					<persistence type="property" />
 				</attribute>
 			</attributes>
 		</itemtype>
