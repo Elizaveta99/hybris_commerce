@@ -551,4 +551,7 @@
 		<property name="itemCleanupHooks" ref="csTicketRetentionHooks"/>
 		<property name="ticketBusinessService" ref="ticketBusinessService"/>
 	</bean>
+
+	<bean id="dynamicHybrisCustomerAttributeBean"
+		  class="de.hybris.training.core.attributehandlers.DynamicHybrisCustomerAttributeBean"/>
 </beans>

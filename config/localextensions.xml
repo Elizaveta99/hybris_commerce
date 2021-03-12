@@ -67,5 +67,6 @@
     <extension name='kymaintegrationbackoffice' />
     <extension name='kymaintegrationsampledata' />
     <extension name='questions' />
+    <extension name='trainingcommerceservices' />
   </extensions>
 </hybrisconfig>

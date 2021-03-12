@@ -29,4 +29,9 @@
 		<property name="importService" ref="importService"/>
 	</bean>
 
+<!--	<alias name="trainingDataImportService" alias="sampleDataImportService" />-->
+<!--	<bean id="trainingDataImportService"-->
+<!--		  class="de.hybris.training.initialdata.dataimport.impl.TrainingDataImportService"-->
+<!--		  parent="defaultSampleDataImportService" />-->
+
 </beans>

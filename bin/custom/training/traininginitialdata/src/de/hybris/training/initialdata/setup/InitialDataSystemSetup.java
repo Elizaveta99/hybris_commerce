@@ -77,7 +77,8 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	@SystemSetup(type = Type.ESSENTIAL, process = Process.ALL)
 	public void createEssentialData(final SystemSetupContext context)
 	{
-		// Add Essential Data here as you require
+		impexImport("/traininginitialdata/import/sampledata/productCatalogs/catalogName/pricegroups.impex");
+		LOG.info("Custom essential data loading for the Training extension completed.");
 	}
 
 	/**
