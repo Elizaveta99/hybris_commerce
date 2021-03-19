@@ -20,7 +20,8 @@ public class QuestionsPopulator implements Populator<QuestionModel, QuestionData
 
     @Override
     public void populate(QuestionModel questionModel, QuestionData questionData) throws ConversionException {
-        questionData.setCode(questionData.getCode());
+        questionData.setCode(questionModel.getCode());
+        questionData.setProductCode(questionModel.getProduct().getCode());
         questionData.setQuestion(questionModel.getQuestion());
         questionData.setQuestionCustomer(customerConverter.convert(questionModel.getQuestionCustomer()));
         Optional.ofNullable(questionModel.getAnswer())

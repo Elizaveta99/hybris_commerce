@@ -1,0 +1,66 @@
+<config xmlns="http://www.hybris.com/cockpit/config"
+        xmlns:y="http://www.hybris.com/cockpit/config/hybris"
+        xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
+        xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree"
+        xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea"
+        xmlns:list-view="http://www.hybris.com/cockpitng/component/listView"
+        xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch"
+        xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+
+
+    <!-- Explorer tree configuration -->
+    <context component="explorer-tree" merge-by="module" parent="auto" module="questions">
+        <explorer-tree:explorer-tree>
+            <explorer-tree:navigation-node id="Questions Addon">
+                    <explorer-tree:type-node code="Question" id="questions" />
+            </explorer-tree:navigation-node>
+        </explorer-tree:explorer-tree>
+    </context>
+
+<!--     Question configuration -->
+<!--     Base configuration -->
+    <context type="Question" component="base" merge-by="type">
+        <y:base>
+            <y:labels>
+                <y:label>Question</y:label>
+                <y:label>Question Customer</y:label>
+                <y:label>Answer</y:label>
+                <y:label>Answer Customer</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+
+<!--     Editor area configuration -->
+    <context merge-by="type"  type="Question" component="editor-area">
+        <editorArea:editorArea>
+            <editorArea:tab name="Questions and Answers"
+                            position="1">
+                <editorArea:section name="Attributes">
+                    <editorArea:attribute qualifier="question" />
+                    <editorArea:attribute qualifier="answer" />
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+
+    <!-- List view configuration -->
+    <context type="Question" component="listview" merge-by="type">
+        <list-view:list-view>
+            <list-view:column qualifier="product" />
+            <list-view:column qualifier="questionCustomer" />
+            <list-view:column qualifier="answer" />
+            <list-view:column qualifier="answerCustomer" />
+        </list-view:list-view>
+    </context>
+
+    <!-- Advanced search configuration -->
+    <context type="Question" component="advanced-search" merge-by="type">
+        <advanced-search:advanced-search>
+            <advanced-search:field-list>
+                <advanced-search:field name="product" selected="true" />
+                <advanced-search:field name="questionCustomer" selected="true" />
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+
+</config>

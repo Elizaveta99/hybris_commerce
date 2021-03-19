@@ -16,6 +16,10 @@
 <items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 			xsi:noNamespaceSchemaLocation="items.xsd">
 
+	<collectiontypes>
+		<collectiontype code="QuestionsCollection" elementtype="Question" autocreate="true" type="list"/>
+	</collectiontypes>
+
 	<relations>
 		<relation code="Product2Question" autocreate="true" generate="false" localized="false">
 			<sourceElement qualifier="product" type="Product" cardinality="one">
@@ -46,6 +50,11 @@
 					<persistence type="property" />
 					<modifiers unique="true" optional="false" initial="true"/>
 				</attribute>
+				<attribute qualifier="creationDate" type="java.util.Date">
+					<description>date of question creation</description>
+					<persistence type="property" />
+					<modifiers optional="true"/>
+				</attribute>
 				<attribute qualifier="question" type="java.lang.String">
 					<description>content of question</description>
 					<persistence type="property" />
@@ -67,6 +76,37 @@
 					<persistence type="property" />
 					<modifiers optional="true"/>
 					<defaultvalue>anonymous</defaultvalue>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype generate="true" code="TimeOfSendEmailWithQuestions"
+				  jaloclass="de.hybris.questions.jalo.TimeOfSendEmailWithQuestions"
+				  autocreate="true">
+			<deployment table="Times" typecode="12346"/>
+			<attributes>
+				<attribute qualifier="code" type="java.lang.String">
+					<modifiers unique="true" optional="false" />
+					<defaultvalue>timeCode</defaultvalue>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="time" type="java.util.Date">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype generate="true"
+				  code="SendEmailWithQuestionsCronJob"
+				  jaloclass="de.hybris.questions.jalo.SendEmailWithQuestionsCronJob"
+				  extends="CronJob"
+				  autocreate="true">
+		</itemtype>
+
+		<itemtype code="SendQuestionsEmailProcess" extends="StoreFrontCustomerProcess">
+			<attributes>
+				<attribute qualifier="questions" type="QuestionsCollection">
+					<persistence type="property" />
 				</attribute>
 			</attributes>
 		</itemtype>

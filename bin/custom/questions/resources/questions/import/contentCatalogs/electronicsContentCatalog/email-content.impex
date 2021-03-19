@@ -9,4 +9,25 @@
 # license agreement you entered into with SAP.
 # -----------------------------------------------------------------------
 $contentCatalog=electronicsContentCatalog
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
+
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+# Path to the Velocity Templates
+$emailResource=jar:de.hybris.questions.setup.QuestionsCustomSetup&/questions/import/emails
+# Package of the Context class
+$emailPackageName=de.hybris.questions.context
+$lang=en
+
+
+# Create Template Renderers
+INSERT_UPDATE RendererTemplate;code[unique=true]	  ;contextClass								;templateScript[lang=en,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator];rendererType(code)[default='velocity']
+                              ;email-questions-body	  ;$emailPackageName.QuestionsEmailContext	;$emailResource/email-questionsBody.vm
+                              ;email-questions-subject;$emailPackageName.QuestionsEmailContext	;$emailResource/email-questionsSubject.vm
+
+# Create Email page Template
+INSERT_UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true]		;active	;frontendTemplateName	;subject(code)							;htmlTemplate(code)		;restrictedPageTypes(code)
+                               ;					   ;QuestionsEmailTemplate  ;true	;QuestionsEmail  		;email-questions-subject				;email-questions-body	;EmailPage
+
+# Create Email Page
+INSERT_UPDATE EmailPage;$contentCV[unique=true];uid[unique=true]	;masterTemplate(uid,$contentCV);approvalStatus(code)[default='approved'];fromEmail[lang=en];fromName[lang=en]
+                       ;					   ;QuestionsEmail	    ;QuestionsEmailTemplate;;temp@hybris.com;Temp Temp

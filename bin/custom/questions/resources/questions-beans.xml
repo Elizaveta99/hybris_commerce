@@ -18,6 +18,7 @@
     <bean class = "questions.data.QuestionData" >
         <description>Data object representing a Question</description>
         <property name = "code" type = "String" />
+        <property name = "productCode" type = "String" />
         <property name = "question" type = "String" />
         <property name = "questionCustomer" type = "de.hybris.platform.commercefacades.user.data.CustomerData" />
         <property name = "answer" type = "String" />

@@ -76,4 +76,52 @@
 		</property>
 	</bean>
 
+	<bean id="sendEmailWithQuestionsJobPerformable" class="de.hybris.questions.jobs.SendEmailWithQuestionsJobPerformable"
+		  parent="abstractJobPerformable">
+		<property name="modelService" ref="modelService" />
+		<property name="emailService" ref="emailService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+		<property name="timeOfSendEmailWithQuestionsService" ref="timeOfSendEmailWithQuestionsService" />
+		<property name="questionsService" ref="questionsService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+	</bean>
+
+	<bean id="generateQuestionsEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="QuestionsEmailTemplate"/>
+	</bean>
+
+	<bean id="sendQuestionsEmailProcessDefinitionResource"
+		  class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/questions/processes/sendQuestionsEmailProcess.xml"/>
+	</bean>
+
+	<bean id="questionsEmailContext" class="de.hybris.questions.context.QuestionsEmailContext"
+		  parent="customerEmailContext" scope="prototype" >
+		<property name="questionsConverter" ref="questionsConverter" />
+	</bean>
+
+	<bean id="timeOfSendEmailWithQuestionsDAO" class="de.hybris.questions.daos.impl.DefaultTimeOfSendEmailWithQuestionsDAO">
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+
+	<bean id="timeOfSendEmailWithQuestionsService" class="de.hybris.questions.service.impl.DefaultTimeOfSendEmailWithQuestionsService">
+		<property name="timeOfSendEmailWithQuestionsDAO" ref="timeOfSendEmailWithQuestionsDAO"/>
+	</bean>
+
+	<bean id="questionDAO" class="de.hybris.questions.daos.impl.DefaultQuestionDAO">
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+
+	<bean id="questionsService" class="de.hybris.questions.service.impl.DefaultQuestionsService">
+		<property name="questionDAO" ref="questionDAO"/>
+	</bean>
+
+	<bean depends-on="processContextResolutionStrategyMap" parent="mapMergeDirective">
+		<property name="key">
+			<value type="java.lang.Class">de.hybris.platform.processengine.model.BusinessProcessModel</value>
+		</property>
+		<property name="value" ref="storeFrontProcessContextStrategy"/>
+	</bean>
+
 </beans>

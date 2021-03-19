@@ -30,6 +30,8 @@ public class QuestionsCustomSetup {
         impexImport("/questions/import/stores/electronics/solr.impex");
         impexImport("/questions/import/productCatalogs/electronicsProductCatalog/questions.impex");
         impexImport("/questions/import/contentCatalogs/electronicsContentCatalog/cms-content.impex");
+        impexImport("/questions/import/contentCatalogs/electronicsContentCatalog/email-content.impex");
+        impexImport("/questions/import/productCatalogs/electronicsProductCatalog/email-jobs.impex");
         LOG.info("Custom project data loading for the Questions extension completed.");
         return true;
     }
