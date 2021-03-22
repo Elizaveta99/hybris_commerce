@@ -40,7 +40,7 @@
             <attributes>
                 <attribute qualifier="isInternal" type="java.lang.Boolean">
                     <description>Defines if the customer is a hybris internal employee. Aggregated information</description>
-                    <persistence type="dynamic" attributeHandler="dynamicHybrisCustomerAttributeBean" />
+                    <persistence type="dynamic" attributeHandler="dynamicHybrisCustomerAttributeHandler" />
                     <modifiers read="true" write="true" optional="true"
                                unique="false" />
                 </attribute>

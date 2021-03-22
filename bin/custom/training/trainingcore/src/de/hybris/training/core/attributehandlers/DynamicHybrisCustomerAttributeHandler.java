@@ -3,7 +3,7 @@ package de.hybris.training.core.attributehandlers;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.model.attribute.DynamicAttributeHandler;
 
-public class DynamicHybrisCustomerAttributeBean implements DynamicAttributeHandler<Boolean, CustomerModel> {
+public class DynamicHybrisCustomerAttributeHandler implements DynamicAttributeHandler<Boolean, CustomerModel> {
 
     @Override
     public Boolean get(CustomerModel model) {

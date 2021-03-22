@@ -1,3 +1,4 @@
+
 INSERT_UPDATE Customer;uid[unique=true];name;sessionLanguage(isocode);sessionCurrency(isocode)
                       ;temp@hybris.com;Temp Temp;en;USD;
 

@@ -553,6 +553,6 @@
 		<property name="ticketBusinessService" ref="ticketBusinessService"/>
 	</bean>
 
-	<bean id="dynamicHybrisCustomerAttributeBean"
-		  class="de.hybris.training.core.attributehandlers.DynamicHybrisCustomerAttributeBean"/>
+	<bean id="dynamicHybrisCustomerAttributeHandler"
+		  class="de.hybris.training.core.attributehandlers.DynamicHybrisCustomerAttributeHandler"/>
 </beans>

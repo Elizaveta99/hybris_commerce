@@ -2,7 +2,7 @@
 
 # Macros / Replacement Parameter definitions
 $productCatalog=electronicsProductCatalog
-$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 $product=product(code,$catalogVersion)[unique=true]
 $currency=currency(isocode)[unique=true]
 $ug=ug(code[default=hybridsPriceGroup])[unique=true]

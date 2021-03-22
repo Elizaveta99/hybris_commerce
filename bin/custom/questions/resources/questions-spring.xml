@@ -81,7 +81,6 @@
 		<property name="modelService" ref="modelService" />
 		<property name="emailService" ref="emailService" />
 		<property name="businessProcessService" ref="businessProcessService" />
-		<property name="timeOfSendEmailWithQuestionsService" ref="timeOfSendEmailWithQuestionsService" />
 		<property name="questionsService" ref="questionsService" />
 		<property name="baseSiteService" ref="baseSiteService" />
 		<property name="baseStoreService" ref="baseStoreService" />
@@ -101,14 +100,6 @@
 		<property name="questionsConverter" ref="questionsConverter" />
 	</bean>
 
-	<bean id="timeOfSendEmailWithQuestionsDAO" class="de.hybris.questions.daos.impl.DefaultTimeOfSendEmailWithQuestionsDAO">
-		<property name="flexibleSearchService" ref="flexibleSearchService"/>
-	</bean>
-
-	<bean id="timeOfSendEmailWithQuestionsService" class="de.hybris.questions.service.impl.DefaultTimeOfSendEmailWithQuestionsService">
-		<property name="timeOfSendEmailWithQuestionsDAO" ref="timeOfSendEmailWithQuestionsDAO"/>
-	</bean>
-
 	<bean id="questionDAO" class="de.hybris.questions.daos.impl.DefaultQuestionDAO">
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 	</bean>
@@ -123,5 +114,11 @@
 		</property>
 		<property name="value" ref="storeFrontProcessContextStrategy"/>
 	</bean>
+
+	<bean id="questionsCountDynamicAttributeHandler" class="de.hybris.questions.attributehandlers.QuestionsCountDynamicAttributeHandler"   />
+
+	<bean id="answeredQuestionsCountDynamicAttributeHandler" class="de.hybris.questions.attributehandlers.AnsweredQuestionsCountDynamicAttributeHandler"   />
+
+	<bean id="ifQuestionIsAnsweredDynamicAttributeHandler" class="de.hybris.questions.attributehandlers.IfQuestionIsAnsweredDynamicAttributeHandler" />
 
 </beans>

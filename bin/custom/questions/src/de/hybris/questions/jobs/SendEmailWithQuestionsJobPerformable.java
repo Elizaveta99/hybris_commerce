@@ -10,13 +10,10 @@ import de.hybris.platform.servicelayer.cronjob.PerformResult;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.site.BaseSiteService;
 import de.hybris.platform.store.services.BaseStoreService;
-import de.hybris.questions.exception.ItemNotFoundException;
 import de.hybris.questions.model.QuestionModel;
 import de.hybris.questions.model.SendEmailWithQuestionsCronJobModel;
 import de.hybris.questions.model.SendQuestionsEmailProcessModel;
-import de.hybris.questions.model.TimeOfSendEmailWithQuestionsModel;
 import de.hybris.questions.service.QuestionsService;
-import de.hybris.questions.service.TimeOfSendEmailWithQuestionsService;
 import org.apache.log4j.Logger;
 
 import java.util.Date;
@@ -26,12 +23,9 @@ public class SendEmailWithQuestionsJobPerformable extends AbstractJobPerformable
 
     private static final Logger LOG = Logger.getLogger(SendEmailWithQuestionsJobPerformable.class);
 
-    private static final String CODE = "timeCode";
-
     private ModelService modelService;
     private EmailService emailService;
     private BusinessProcessService businessProcessService;
-    private TimeOfSendEmailWithQuestionsService timeOfSendEmailWithQuestionsService;
     private QuestionsService questionsService;
     private BaseSiteService baseSiteService;
     private BaseStoreService baseStoreService;
@@ -39,17 +33,14 @@ public class SendEmailWithQuestionsJobPerformable extends AbstractJobPerformable
     @Override
     public PerformResult perform(SendEmailWithQuestionsCronJobModel sendEmailWithQuestionsCronJobModel) {
         List<QuestionModel> questionModels;
-        TimeOfSendEmailWithQuestionsModel timeOfSendEmailWithQuestionsModel;
 
-        try {
-            timeOfSendEmailWithQuestionsModel = timeOfSendEmailWithQuestionsService.getTime();
-            Date time = timeOfSendEmailWithQuestionsModel.getTime();
+        Date time = sendEmailWithQuestionsCronJobModel.getLastStartTime();
+        if (time != null) {
             questionModels = questionsService.getQuestionsAfterDate(time);
-        } catch (ItemNotFoundException e) {
-            timeOfSendEmailWithQuestionsModel = modelService.create(TimeOfSendEmailWithQuestionsModel.class);
-            timeOfSendEmailWithQuestionsModel.setCode(CODE);
+        } else {
             questionModels = questionsService.getQuestions();
         }
+
 
         if (questionModels.isEmpty()) {
             LOG.info("Send Email Job: there are no new questions");
@@ -68,8 +59,8 @@ public class SendEmailWithQuestionsJobPerformable extends AbstractJobPerformable
             LOG.info("Send Email Job: email with new questions");
         }
 
-        timeOfSendEmailWithQuestionsModel.setTime(new Date());
-        modelService.save(timeOfSendEmailWithQuestionsModel);
+        sendEmailWithQuestionsCronJobModel.setLastStartTime(sendEmailWithQuestionsCronJobModel.getStartTime());
+        modelService.save(sendEmailWithQuestionsCronJobModel);
         return new PerformResult(CronJobResult.SUCCESS, CronJobStatus.FINISHED);
     }
 
@@ -96,10 +87,6 @@ public class SendEmailWithQuestionsJobPerformable extends AbstractJobPerformable
 
     public void setBusinessProcessService(BusinessProcessService businessProcessService) {
         this.businessProcessService = businessProcessService;
-    }
-
-    public void setTimeOfSendEmailWithQuestionsService(TimeOfSendEmailWithQuestionsService timeOfSendEmailWithQuestionsService) {
-        this.timeOfSendEmailWithQuestionsService = timeOfSendEmailWithQuestionsService;
     }
 
     public void setQuestionsService(QuestionsService questionsService) {

@@ -10,7 +10,7 @@
 
 <div class="product__listing product__list">
     <c:forEach items="${searchPageData.results}" var="product" varStatus="status">
-        !!!!!! ${product.questions}
+        Amount of answered questions: ${product.answeredQuestionsCount}
         <c:if test="${product.questionsCount > 1}">
             <img src="${icon.downloadURL}" />
         </c:if>

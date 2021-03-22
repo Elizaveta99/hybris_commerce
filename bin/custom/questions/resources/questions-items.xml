@@ -37,7 +37,11 @@
 			<attributes>
 				<attribute qualifier="questionsCount" type="java.lang.Integer">
 					<description>Amount of questions about product.</description>
-					<persistence type="property" />
+					<persistence type="dynamic" attributeHandler="questionsCountDynamicAttributeHandler" />
+				</attribute>
+				<attribute qualifier="answeredQuestionsCount" type="java.lang.Integer">
+					<description>Amount of answered questions about product.</description>
+					<persistence type="dynamic" attributeHandler="answeredQuestionsCountDynamicAttributeHandler" />
 				</attribute>
 			</attributes>
 		</itemtype>
@@ -49,11 +53,6 @@
 					<description>short unique code of question</description>
 					<persistence type="property" />
 					<modifiers unique="true" optional="false" initial="true"/>
-				</attribute>
-				<attribute qualifier="creationDate" type="java.util.Date">
-					<description>date of question creation</description>
-					<persistence type="property" />
-					<modifiers optional="true"/>
 				</attribute>
 				<attribute qualifier="question" type="java.lang.String">
 					<description>content of question</description>
@@ -77,21 +76,9 @@
 					<modifiers optional="true"/>
 					<defaultvalue>anonymous</defaultvalue>
 				</attribute>
-			</attributes>
-		</itemtype>
-
-		<itemtype generate="true" code="TimeOfSendEmailWithQuestions"
-				  jaloclass="de.hybris.questions.jalo.TimeOfSendEmailWithQuestions"
-				  autocreate="true">
-			<deployment table="Times" typecode="12346"/>
-			<attributes>
-				<attribute qualifier="code" type="java.lang.String">
-					<modifiers unique="true" optional="false" />
-					<defaultvalue>timeCode</defaultvalue>
-					<persistence type="property" />
-				</attribute>
-				<attribute qualifier="time" type="java.util.Date">
-					<persistence type="property" />
+				<attribute qualifier="answered" type="java.lang.Boolean">
+					<description>if question is answered or not</description>
+					<persistence type="dynamic" attributeHandler="ifQuestionIsAnsweredDynamicAttributeHandler" />
 				</attribute>
 			</attributes>
 		</itemtype>
@@ -101,6 +88,11 @@
 				  jaloclass="de.hybris.questions.jalo.SendEmailWithQuestionsCronJob"
 				  extends="CronJob"
 				  autocreate="true">
+			<attributes>
+				<attribute qualifier="lastStartTime" type="java.util.Date">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
 		</itemtype>
 
 		<itemtype code="SendQuestionsEmailProcess" extends="StoreFrontCustomerProcess">
