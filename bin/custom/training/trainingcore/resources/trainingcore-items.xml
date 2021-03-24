@@ -36,8 +36,16 @@
 
     <itemtypes>
 
-        <!-- Add your item definitions here -->
-
+        <itemtype code="Customer" generate="false" autocreate="false">
+            <attributes>
+                <attribute qualifier="isInternal" type="java.lang.Boolean">
+                    <description>Defines if the customer is a hybris internal employee. Aggregated information</description>
+                    <persistence type="dynamic" attributeHandler="dynamicHybrisCustomerAttributeHandler" />
+                    <modifiers read="true" write="true" optional="true"
+                               unique="false" />
+                </attribute>
+            </attributes>
+        </itemtype>
 
         <!-- TypeGroups are for structure of this file only -->
 

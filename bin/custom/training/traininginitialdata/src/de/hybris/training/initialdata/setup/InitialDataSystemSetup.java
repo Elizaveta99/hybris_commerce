@@ -19,8 +19,13 @@ import de.hybris.platform.core.initialization.SystemSetup.Type;
 import de.hybris.platform.core.initialization.SystemSetupContext;
 import de.hybris.platform.core.initialization.SystemSetupParameter;
 import de.hybris.platform.core.initialization.SystemSetupParameterMethod;
+import de.hybris.platform.servicelayer.impex.ImportConfig;
+import de.hybris.platform.servicelayer.impex.ImportResult;
+import de.hybris.platform.servicelayer.impex.ImportService;
+import de.hybris.platform.servicelayer.impex.impl.StreamBasedImpExResource;
 import de.hybris.training.initialdata.constants.TrainingInitialDataConstants;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +48,7 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 
 	private CoreDataImportService coreDataImportService;
 	private SampleDataImportService sampleDataImportService;
+	private ImportService importService;
 
 	/**
 	 * Generates the Dropdown and Multi-select boxes for the project data import
@@ -71,7 +77,8 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	@SystemSetup(type = Type.ESSENTIAL, process = Process.ALL)
 	public void createEssentialData(final SystemSetupContext context)
 	{
-		// Add Essential Data here as you require
+		impexImport("/traininginitialdata/import/sampledata/productCatalogs/catalogName/pricegroups.impex");
+		LOG.info("Custom essential data loading for the Training extension completed.");
 	}
 
 	/**
@@ -101,30 +108,53 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	@SystemSetup(type = Type.PROJECT, process = Process.ALL)
 	public void createProjectData(final SystemSetupContext context)
 	{
-		/*
-		 * Add import data for each site you have configured
-		 */
+		LOG.info("Custom project data loading for the Training extension completed.");
 	}
 
-	public CoreDataImportService getCoreDataImportService()
-	{
+	protected boolean impexImport(String filename) {
+		final String message = "Training impexing [" + filename + "]...";
+		try (final InputStream resourceAsStream = getClass().getResourceAsStream(filename)) {
+			LOG.info(message);
+			final ImportConfig importConfig = new ImportConfig();
+			importConfig.setScript(new StreamBasedImpExResource(resourceAsStream, "UTF-8"));
+			importConfig.setLegacyMode(Boolean.FALSE);
+			final ImportResult importResult = getImportService().importData(importConfig);
+			if (importResult.isError()) {
+				LOG.error(message + " FAILED");
+				return false;
+			}
+		}
+		catch (final Exception e) {
+			LOG.error(message + " FAILED", e);
+			return false;
+		}
+		return true;
+	}
+
+	public CoreDataImportService getCoreDataImportService() {
 		return coreDataImportService;
 	}
 
 	@Required
-	public void setCoreDataImportService(final CoreDataImportService coreDataImportService)
-	{
+	public void setCoreDataImportService(final CoreDataImportService coreDataImportService) {
 		this.coreDataImportService = coreDataImportService;
 	}
 
-	public SampleDataImportService getSampleDataImportService()
-	{
+	public SampleDataImportService getSampleDataImportService() {
 		return sampleDataImportService;
 	}
 
 	@Required
-	public void setSampleDataImportService(final SampleDataImportService sampleDataImportService)
-	{
+	public void setSampleDataImportService(final SampleDataImportService sampleDataImportService) {
 		this.sampleDataImportService = sampleDataImportService;
+	}
+
+	public ImportService getImportService() {
+		return importService;
+	}
+
+	@Required
+	public void setImportService(ImportService importService) {
+		this.importService = importService;
 	}
 }

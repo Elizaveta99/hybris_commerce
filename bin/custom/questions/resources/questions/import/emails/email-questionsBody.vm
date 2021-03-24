@@ -1,0 +1,22 @@
+<html>
+    <head>
+    </head>
+
+    <body bgcolor="#ffffff">
+
+    <h1>New questions</h1>
+
+    <ul>
+        #foreach( $question in ${ctx.questions} )
+            <li>$question.productCode</li>
+            <li>$question.code</li>
+            <li>$question.question</li>
+            <li>$question.answer</li>
+            <br>
+        #end
+    </ul>
+
+    <p>This is a Questions Email from Hybris</p>
+
+    </body>
+</html>

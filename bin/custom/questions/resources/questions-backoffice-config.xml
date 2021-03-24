@@ -1,0 +1,77 @@
+<config xmlns="http://www.hybris.com/cockpit/config"
+        xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
+        xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree"
+        xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea"
+        xmlns:list-view="http://www.hybris.com/cockpitng/component/listView"
+        xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+
+
+    <!-- Explorer tree configuration -->
+    <context component="explorer-tree" merge-by="module" parent="auto" module="questions">
+        <explorer-tree:explorer-tree>
+            <explorer-tree:navigation-node id="Questions Addon">
+                    <explorer-tree:type-node code="Question" id="questions" />
+            </explorer-tree:navigation-node>
+        </explorer-tree:explorer-tree>
+    </context>
+
+<!--     Editor area configuration -->
+    <context merge-by="type"  type="Question" component="editor-area">
+        <editorArea:editorArea>
+            <editorArea:essentials>
+                <editorArea:essentialSection name="questions.hmc.essential" description="questions.hmc.text">
+                    <editorArea:attribute qualifier="product"/>
+                    <editorArea:attribute qualifier="questionCustomer"/>
+                </editorArea:essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab name="questions.hmc.tab1">
+                <editorArea:section name="questions.hmc.attributes">
+                    <editorArea:attribute qualifier="question" />
+                    <editorArea:attribute qualifier="answer" />
+                    <editorArea:attribute qualifier="answered" />
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+
+    <!-- List view configuration -->
+    <context type="Question" component="listview" merge-by="type">
+        <list-view:list-view>
+            <list-view:column qualifier="product" />
+            <list-view:column qualifier="questionCustomer" />
+            <list-view:column qualifier="answer" />
+            <list-view:column qualifier="answerCustomer" />
+        </list-view:list-view>
+    </context>
+
+    <!-- Advanced search configuration -->
+    <context type="Question" component="advanced-search" merge-by="type">
+        <advanced-search:advanced-search>
+            <advanced-search:field-list>
+                <advanced-search:field name="product" selected="true" />
+                <advanced-search:field name="questionCustomer" selected="true" />
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+
+    <context merge-by="type"  type="Question" component="create-wizard">
+        <wz:flow id="createNewQuestion" title="Create New Question">
+            <wz:step id="step1" label="questions.hmc.essential.label" sublabel="questions.hmc.essential.sublabel">
+                <wz:content id="step1.content" merge-mode="replace">
+                    <wz:property-list root="newQuestion">
+                        <wz:property qualifier="code" type="java.lang.String"/>
+                        <wz:property qualifier="question" type="java.lang.String"/>
+                        <wz:property qualifier="questionCustomer" type="java.lang.String"/>
+                        <wz:property qualifier="answer" type="java.lang.String"/>
+                        <wz:property qualifier="answerCustomer" type="java.lang.String"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:done/>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context>
+
+</config>

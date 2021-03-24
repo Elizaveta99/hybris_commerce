@@ -1,0 +1,26 @@
+# Macros / Replacement Parameter definitions
+$productCatalog=electronicsProductCatalog
+$productCatalogName=Electronics Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
+$supercategories=supercategories(code, $catalogVersion)
+$baseProduct=baseProduct(code,$catalogVersion)
+$approved=approvalstatus(code)[default='check']
+
+$contentCatalog=electronicsContentCatalog
+$contentCatalogName=Electronics Content Catalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
+
+#Insert Products
+INSERT_UPDATE Product;code[unique=true];$supercategories;manufacturerName;manufacturerAID;unit(code);ean;variantType(code);$catalogVersion;$approved
+                     ;23191;1288, brand_5;Sony;ACC-CSPW;pieces;
+                     ;23210;576, brand_5;Sony;DSC-P71;pieces;4901780755943
+                     ;4135570;1288, brand_5;Sony;ACC-BBV5;pieces;4905524636888
+
+
+# Insert Questions
+INSERT_UPDATE Question;code[unique=true];question;questionCustomer(uid);answer;answerCustomer(uid);product(code,$catalogVersion)[unique=true]
+                      ;Q1;Question 1;vipgold@hybris.com;Answer 1;;23191
+                      ;Q2;Question 2;vipgold@hybris.com;;;23191
+                      ;Q3;Question 3;vipgold@hybris.com;;;23210
+                      ;Q4;Question 4;vipgold@hybris.com;;;4135570
+                      ;Q5;Question 5;vipgold@hybris.com;;;4135570
